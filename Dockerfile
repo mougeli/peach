@@ -4,10 +4,9 @@ WORKDIR $GOPATH/src/peach
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && go get \
     && go build
-    
-RUN ./peach new --target=/app.peach
-
-
-
-EXPOSE 4000
-CMD ["./peach"]
+RUN cp ./run.sh /run.sh \
+    && chmod 777 /run.sh
+ENV APP peach
+ENV GIT https://github.com/peachdocs/peach.peach
+EXPOSE 5556
+CMD ["/run.sh"]
